@@ -9,7 +9,7 @@ export const REDIS_ClIENT_PROVIDE = 'REDIS_ClIENT';
   providers: [
     RedisService,
     {
-      provide: REDIS_ClIENT_PROVIDE,
+      provide: 'REDIS_ClIENT',
       async useFactory() {
         const client = createClient({
           socket: {
@@ -17,8 +17,12 @@ export const REDIS_ClIENT_PROVIDE = 'REDIS_ClIENT';
             port: 6379,
           },
         });
-        await client.connect();
-        return client;
+        try {
+          await client.connect();
+          return client;
+        } catch (error) {
+          console.log('redis conn error: \n', error);
+        }
       },
     },
   ],

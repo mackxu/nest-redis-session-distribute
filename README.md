@@ -18,5 +18,19 @@
 - JWT 主要用于无状态的身份验证和授权
 - 分布式 Session 则用于在服务器端维护丰富的用户会话状态。比如在电商系统中，用户的购物车状态、浏览历史等信息
 
+## 分布式session
 
+### nginx代理 & 负载均衡设置
 
+```nginx
+upstream multi-server {
+  server 1.0.0.1:3001;
+  server 1.0.0.1:3002;
+}
+
+server {
+  location = /count {
+    proxy_pass http://multi-server;
+  }
+}
+```

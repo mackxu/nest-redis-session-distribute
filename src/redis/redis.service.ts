@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { REDIS_ClIENT_PROVIDE } from './redis.module';
 import { RedisClientType } from 'redis';
 
 @Injectable()
 export class RedisService {
-  @Inject(REDIS_ClIENT_PROVIDE)
+  @Inject('REDIS_ClIENT')
   private readonly redisClient: RedisClientType;
 
   async hashGet(key: string) {

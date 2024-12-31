@@ -6,8 +6,10 @@ export class SessionService {
   @Inject(RedisService)
   private redisService: RedisService;
 
+  async getSession<T>(sid: string): Promise<T>;
   getSession(sid: string) {
-    this.redisService.hashGet(`sid_${sid}`);
+    if (!sid) return {};
+    return this.redisService.hashGet(`sid_${sid}`);
   }
   async setSession(
     sid: string,
