@@ -12,6 +12,10 @@
 - SessionService
 - cookie-parser
 - nginx 负载均衡
+- createParamDecorator
+- SetMetadata
+- 默认情况下，`ValidationPipe` 不验证使用自定义装饰器注释的参数
+- 装饰器组合`applyDecorators`
 
 ## 区别
 
@@ -19,6 +23,7 @@
 - 分布式 Session 则用于在服务器端维护丰富的用户会话状态。比如在电商系统中，用户的购物车状态、浏览历史等信息
 
 ## 分布式session
+手动管理cookie sid
 
 ### nginx代理 & 负载均衡设置
 

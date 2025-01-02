@@ -1,7 +1,8 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { SessionService } from './session/session.service';
+import { Cookies } from './decorators/cookies.decorator';
 
 @Controller()
 export class AppController {
@@ -16,8 +17,10 @@ export class AppController {
   }
 
   @Get('count')
-  async count(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const sid = req.cookies['sid'];
+  async count(
+    @Cookies('sid') sid: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const session = await this.sessionService.getSession<{ count: string }>(
       sid,
     );
